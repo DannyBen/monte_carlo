@@ -41,8 +41,15 @@ experiment.sample_transformation = -> (sample) { sample > 0.5 }
 results = experiment.run
 ```
 
-The results returned from the experiment are an array of `MonteCarlo::Result` object.
-Each result contains:
+Alternatively, if you don't need a transformation method, use the shorthand block syntax:
+
+```ruby
+results = MonteCarlo::Experiment.run(100000) { rand > 0.5 }
+```
+
+The experiment returns a `MonteCarlo::ExperimentResults` object which contains an array of `MonteCarlo::Results` as well as some other handy methods.
+
+Each `MonteCarlo::Result` contains:
 - `index`: the index of the sample
 - `value`: the final value returned from sampling, after transformation
 - `sample_value`: the value returned from the sample method, before transformation
