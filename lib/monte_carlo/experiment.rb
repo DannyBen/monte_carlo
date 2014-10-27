@@ -1,10 +1,10 @@
 module MonteCarlo
   class Experiment
-
     attr_accessor :times, :sample_method, :sample_transformation
 
-    def initialize(times = 10000)
+    def initialize(times = 10000, &block)
       @times = times
+      @sample_method = block
     end
 
     def run
