@@ -12,7 +12,7 @@ module MonteCarlo
         raise MonteCarlo::Errors::NoSampleMethodError, 'A sample method for this experiment is not defined'
       end
 
-      results = []
+      results = MonteCarlo::ExperimentResults.new
 
       @times.times do |index|
         result = MonteCarlo::Result.new(index)
