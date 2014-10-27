@@ -18,5 +18,13 @@ module MonteCarlo
       end
     end
 
+    def probability_distribution
+      @results.group_by(&:value).inject({}) { |percentages, (value, results)| percentages[value] = results.size.to_f / self.size; percentages }
+    end
+
+    def frequency_distribution
+      @results.group_by(&:value).inject({}) { |counts, (value, results)| counts[value] = results.size; counts }
+    end
+
   end
 end
