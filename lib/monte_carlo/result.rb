@@ -11,7 +11,11 @@ module MonteCarlo
     end
 
     def <=> other
-      self.value <=> other.value
+      self.to_i <=> other.to_i
+    end
+
+    def to_i
+      @value
     end
 
   end
