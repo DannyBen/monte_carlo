@@ -1,5 +1,6 @@
 module MonteCarlo
   class Result
+    include Comparable
 
     attr_accessor :value, :sample_value, :index
 
@@ -7,6 +8,10 @@ module MonteCarlo
       @value = value
       @sample_value = sample_value
       @index = index
+    end
+
+    def <=> other
+      self.value <=> other.value
     end
 
   end
