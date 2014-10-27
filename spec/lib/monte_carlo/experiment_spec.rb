@@ -14,6 +14,13 @@ describe MonteCarlo::Experiment do
   end
 
   describe :run do
+    it 'should raise a NoSampleMethodError if a sample method is not defined' do
+      experiment.sample_method = nil
+      expect {
+        experiment.run
+      }.to raise_error MonteCarlo::Errors::NoSampleMethodError
+    end
+
     it 'should call the sample_method the correct number of times' do
       sample_double = double(call: sample_value)
       experiment.sample_method = sample_double

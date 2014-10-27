@@ -8,6 +8,8 @@ module MonteCarlo
     end
 
     def run
+      raise MonteCarlo::Errors::NoSampleMethodError if @sample_method.nil?
+
       results = []
 
       @times.times do |index|
