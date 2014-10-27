@@ -22,18 +22,24 @@ module MonteCarlo
       results = MonteCarlo::ExperimentResults.new
 
       @times.times do |index|
-        result = MonteCarlo::Result.new(index)
-        result.sample_value = @sample_method.call()
-        if @sample_transformation.nil?
-          result.value = result.sample_value
-        else
-          result.value = @sample_transformation.call(result.sample_value)
-        end
-
-        results << result
+        results << run_sample(index)
       end
 
       results
+    end
+
+    private
+
+    def run_sample(index)
+      result = MonteCarlo::Result.new(index)
+      result.sample_value = @sample_method.call()
+      if @sample_transformation.nil?
+        result.value = result.sample_value
+      else
+        result.value = @sample_transformation.call(result.sample_value)
+      end
+
+      result
     end
 
   end
