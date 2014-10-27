@@ -8,7 +8,9 @@ module MonteCarlo
     end
 
     def run
-      raise MonteCarlo::Errors::NoSampleMethodError if @sample_method.nil?
+      if @sample_method.nil?
+        raise MonteCarlo::Errors::NoSampleMethodError, 'A sample method for this experiment is not defined'
+      end
 
       results = []
 

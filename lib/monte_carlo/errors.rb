@@ -1,9 +1,7 @@
 module MonteCarlo
   module Errors
 
-    class NoSampleMethodError < StandardError
-      @message = 'A sample method for this experiment is not defined'
-    end
+    class NoSampleMethodError < StandardError; end
 
   end
 end
