@@ -1,8 +1,15 @@
 module MonteCarlo
   class Experiment
+
+    DEFAULT_TIMES = 10000
+
     attr_accessor :times, :sample_method, :sample_transformation
 
-    def initialize(times = 10000, &block)
+    def self.run(times = DEFAULT_TIMES, &block)
+      MonteCarlo::Experiment.new(times, &block).run
+    end
+
+    def initialize(times = DEFAULT_TIMES, &block)
       @times = times
       @sample_method = block
     end
