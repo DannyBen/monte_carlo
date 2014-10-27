@@ -1,10 +1,14 @@
 module MonteCarlo
   class Experiment
 
-    attr_accessor :times, :sample_method, :sample_transformation, :results
+    attr_accessor :times, :sample_method, :sample_transformation
+
+    def initialize(times = 10000)
+      @times = times
+    end
 
     def run
-      @results = []
+      results = []
 
       @times.times do |index|
         result = MonteCarlo::Result.new(index)
@@ -15,10 +19,10 @@ module MonteCarlo
           result.value = @sample_transformation.call(result.sample_value)
         end
 
-        @results << result
+        results << result
       end
 
-      @results
+      results
     end
 
   end
