@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = MonteCarlo::VERSION
   spec.authors       = ["Assaf Gelber"]
   spec.email         = ["assaf.gelber@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.summary       = %q{A small gem to help with Monte Carlo Method experiments in ruby.}
+  spec.description   = %q{A small gem to help with Monte Carlo Method experiments in ruby.}
+  spec.homepage      = "https://github.com/agelber/monte_carlo"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
