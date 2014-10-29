@@ -4,12 +4,12 @@ describe MonteCarlo::Experiment do
 
   let(:times) { 1000 }
   let(:sample_value) { 1 }
-  let(:sample_transformation) { -> (sample) {sample * 2} }
+  let(:computation) { -> (sample) {sample * 2} }
   let(:experiment) do
     experiment = MonteCarlo::Experiment.new
     experiment.times = 1000
     experiment.sample_method = -> { sample_value }
-    experiment.sample_transformation = sample_transformation
+    experiment.computation = computation
     experiment
   end
 
@@ -40,7 +40,7 @@ describe MonteCarlo::Experiment do
 
     it 'should return results with correct values' do
       results = experiment.run
-      expect(results.map(&:value)).to all( eq sample_transformation.call(sample_value))
+      expect(results.map(&:value)).to all( eq computation.call(sample_value))
     end
   end
 

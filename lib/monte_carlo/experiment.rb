@@ -3,7 +3,7 @@ module MonteCarlo
 
     DEFAULT_TIMES = 10000
 
-    attr_accessor :times, :sample_method, :sample_transformation
+    attr_accessor :times, :sample_method, :computation
 
     def self.run(times = DEFAULT_TIMES, &block)
       MonteCarlo::Experiment.new(times, &block).run
@@ -33,10 +33,10 @@ module MonteCarlo
     def run_sample(index)
       result = MonteCarlo::Result.new(index)
       result.sample_value = @sample_method.call()
-      if @sample_transformation.nil?
+      if @computation.nil?
         result.value = result.sample_value
       else
-        result.value = @sample_transformation.call(result.sample_value)
+        result.value = @computation.call(result.sample_value)
       end
 
       result
