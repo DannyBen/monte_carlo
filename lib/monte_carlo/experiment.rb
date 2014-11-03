@@ -3,7 +3,7 @@ module MonteCarlo
 
     DEFAULT_TIMES = 10000
 
-    attr_accessor :times, :sample_method, :computation
+    attr_accessor :times, :sample_method, :computation, :before_each, :after_each
 
     def self.run(times = DEFAULT_TIMES, &block)
       MonteCarlo::Experiment.new(times, &block).run
@@ -22,7 +22,9 @@ module MonteCarlo
       results = MonteCarlo::ExperimentResults.new
 
       @times.times do |index|
+        @before_each.call() unless @before_each.nil?
         results << run_sample(index)
+        @after_each.call() unless @after_each.nil?
       end
 
       results

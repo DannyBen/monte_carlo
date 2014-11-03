@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe MonteCarlo::Experiment do
 
-  let(:times) { 1000 }
+  let(:times) { 10 }
   let(:sample_value) { 1 }
   let(:computation) { -> (sample) {sample * 2} }
   let(:experiment) do
     experiment = MonteCarlo::Experiment.new
-    experiment.times = 1000
+    experiment.times = times
     experiment.sample_method = -> { sample_value }
     experiment.computation = computation
     experiment
