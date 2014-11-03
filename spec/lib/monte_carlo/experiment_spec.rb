@@ -44,4 +44,22 @@ describe MonteCarlo::Experiment do
     end
   end
 
+  describe :before_each do
+    it 'should run the before_each method before each run' do
+      before = double(call: nil)
+      experiment.before_each = before
+      expect(before).to receive(:call).exactly(times).times
+      experiment.run
+    end
+  end
+
+  describe :after_each do
+    it 'should run the after_each method after each run' do
+      after = double(call: nil)
+      experiment.after_each = after
+      expect(after).to receive(:call).exactly(times).times
+      experiment.run
+    end
+  end
+
 end
