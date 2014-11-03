@@ -22,9 +22,12 @@ module MonteCarlo
       results = MonteCarlo::ExperimentResults.new
 
       @times.times do |index|
-        @before_each.call() unless @before_each.nil?
-        results << run_sample(index)
-        @after_each.call() unless @after_each.nil?
+        begin
+          @before_each.call() unless @before_each.nil?
+          results << run_sample(index)
+        ensure
+          @after_each.call() unless @after_each.nil?
+        end
       end
 
       results
