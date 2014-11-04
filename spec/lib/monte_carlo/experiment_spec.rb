@@ -44,30 +44,30 @@ describe MonteCarlo::Experiment do
     end
   end
 
-  describe :before_each do
-    let(:before) { double(call: nil) }
+  describe :setup do
+    let(:setup) { double(call: nil) }
 
-    before { experiment.before_each = before }
+    before { experiment.setup = setup }
 
-    it 'should run the before_each method before each run' do
-      expect(before).to receive(:call).exactly(times).times
+    it 'should run the setup method before each run' do
+      expect(setup).to receive(:call).exactly(times).times
       experiment.run
     end
   end
 
-  describe :after_each do
-    let(:after) { double(call: nil) }
+  describe :reset do
+    let(:reset) { double(call: nil) }
 
-    before { experiment.after_each = after }
+    before { experiment.reset = reset }
 
-    it 'should run the after_each method after each run' do
-      expect(after).to receive(:call).exactly(times).times
+    it 'should run the reset method after each run' do
+      expect(reset).to receive(:call).exactly(times).times
       experiment.run
     end
 
-    it 'should run even when sample method raises exception' do
+    it 'should run reset method even when sample method raises exception' do
       experiment.sample_method = -> { raise }
-      expect(after).to receive(:call).exactly(:once)
+      expect(reset).to receive(:call).exactly(:once)
       experiment.run rescue nil
     end
   end

@@ -24,7 +24,7 @@ Each experiment conatins:
 - `times`: the number of sample to create (defaults to 10,000)
 - `sample_method`: the method with which to generate a sample each iteration
 - `computation`: an optional coputation method to run on each sample to obtain a result
-- `before_each` & `after_each`: optional methods to run before and after each iteration
+- `setup` & `reset`: optional methods to run before and after each iteration
 
 For example;
 
