@@ -1,4 +1,4 @@
-# MonteCarlo
+# MonteCarlo [![Build Status](https://travis-ci.org/agelber/monte_carlo.svg)](https://travis-ci.org/agelber/monte_carlo)
 
 A utility to write quick [Monte Carlo Method](http://en.wikipedia.org/wiki/Monte_Carlo_method) experiments.
 
