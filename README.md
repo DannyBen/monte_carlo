@@ -42,14 +42,14 @@ experiment.computation = -> (sample) { sample > 0.5 }
 results = experiment.run
 ```
 
-Another options is to use the configuration DSL, like so:
+Another option is to use the configuration DSL, like so:
 
 ```ruby
 # Create an experiment and pass it a configuration block
 experiment = MonteCarlo::Experiment.new do
   times 1000000
   sample_method { rand }
-  compuation { |sample| sample > 0.5 }
+  computation { |sample| sample > 0.5 }
 end
 
 # And run it normally
