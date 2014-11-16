@@ -6,12 +6,14 @@ module MonteCarlo
     attr_accessor :times, :sample_method, :computation, :setup, :reset
 
     def self.run(times = DEFAULT_TIMES, &block)
-      MonteCarlo::Experiment.new(times, &block).run
+      experiment = MonteCarlo::Experiment.new(times)
+      experiment.sample_method = block
+      experiment.run
     end
 
     def initialize(times = DEFAULT_TIMES, &block)
       @times = times
-      @sample_method = block
+      MonteCarlo::ExperimentDSL.new(self).instance_eval(&block) if block_given?
     end
 
     def run
