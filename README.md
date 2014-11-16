@@ -42,7 +42,21 @@ experiment.computation = -> (sample) { sample > 0.5 }
 results = experiment.run
 ```
 
-Alternatively, you can write your sample and computation method as one with the shorthand block syntax:
+Another options is to use the configuration DSL, like so:
+
+```ruby
+# Create an experiment and pass it a configuration block
+experiment = MonteCarlo::Experiment.new do
+  times 1000000
+  sample_method { rand }
+  compuation { |sample| sample > 0.5 }
+end
+
+# And run it normally
+results = experiment.run
+```
+
+Alternatively, you can write your sample and computation method as one with the shorthand block syntax and get the restults straight away:
 
 ```ruby
 results = MonteCarlo::Experiment.run(100000) { rand > 0.5 }
