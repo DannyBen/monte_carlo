@@ -4,7 +4,7 @@ describe MonteCarlo::Experiment do
 
   let(:times) { 10 }
   let(:sample_value) { 1 }
-  let(:computation) { -> (sample) {sample * 2} }
+  let(:computation) { ->(sample) {sample * 2} }
   let(:experiment) do
     experiment = MonteCarlo::Experiment.new
     experiment.times = times
