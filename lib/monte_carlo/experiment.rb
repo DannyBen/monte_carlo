@@ -27,7 +27,7 @@ module MonteCarlo
     # @example
     #   results = MonteCarlo::Experiment.run(100000) { rand(10) }
     #
-    # @param times [optional, #times] the number of samples to generate (Defaults to 10000)
+    # @param times [optional, #times] the number of samples to generate
     # @param block [Block] the method to generate one sample each iteration
     # @raise [MonteCarlo::Errors::NoSampleMethodError] if no block is given
     # @return [MonteCarlo::ExperimentResults]
@@ -48,8 +48,8 @@ module MonteCarlo
     #   
     #   results = experiment.run
     #
-    # @param times (see #self.run)
-    # @param block [optional, Block] a block to configure the experiment using a DSL @see MonteCarlo::ExperimentDSL
+    # @param times [optional, #times] the number of samples to generate
+    # @param block [optional, Block] a block to configure the experiment using the {MonteCarlo::ExperimentDSL}
     # @return [MonteCarlo::Experiment]
     def initialize(times = DEFAULT_TIMES, &block)
       @times = times
