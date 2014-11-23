@@ -20,56 +20,28 @@ Or install it yourself as:
 
 ## Usage
 
-Each experiment conatins:
-- `times`: the number of sample to create (defaults to 10,000)
-- `sample_method`: the method with which to generate a sample each iteration
-- `computation`: an optional coputation method to run on each sample to obtain a result
-- `setup` & `reset`: optional methods to run before and after each iteration
-
-For example;
+Every `MonteCarlo::Experiment` must have a sample method to generate random samples. The samples generated when the experiment is run will be collected into a `MonteCarlo::ExperimentResults` object after an optional computation method to turn the random sample into a meaningful value.
+For example, the sample method may draw a random number between 1 and 10 and the computation method will test whether the number is greater than 5, returning `true` or `false` results.
 
 ```ruby
-# Create an experiment with an optional number of times
-experiment = MonteCarlo::Experiment.new(100000)
-
-# Set your smaple method
-experiment.sample_method = -> { rand }
-
-# Set your optional computation method
-experiment.computation = -> (sample) { sample > 0.5 }
-
-# Run your experiment and get your results
-results = experiment.run
-```
-
-Another option is to use the configuration DSL, like so:
-
-```ruby
-# Create an experiment and pass it a configuration block
+# Create an instance and configure it with the DSL
 experiment = MonteCarlo::Experiment.new do
   times 1000000
-  sample_method { rand }
-  computation { |sample| sample > 0.5 }
+  sample_method { rand(10) }
+  computation { |sample| sample >= 5 }
 end
 
-# And run it normally
 results = experiment.run
+
+results.probability_distribution
+# => {true=>0.499443, false=>0.500557}
 ```
 
-Alternatively, you can write your sample and computation method as one with the shorthand block syntax and get the restults straight away:
+Or run it with the shorthand class method syntax:
 
-```ruby
-results = MonteCarlo::Experiment.run(100000) { rand > 0.5 }
-```
+## Docs
 
-The experiment returns a `MonteCarlo::ExperimentResults` object which contains an array of `MonteCarlo::Results` as well as some other handy methods.
-
-Each `MonteCarlo::Result` contains:
-- `index`: the index of the sample
-- `value`: the final value returned from sampling, after computation
-- `sample_value`: the value returned from the sample method, before computation
-
-If no computation method was given, `value` and `sample_value` will be the same.
+[Can be found here](http://www.rubydoc.info/gems/monte_carlo)
 
 ## Contributing
 
