@@ -21,6 +21,7 @@ Or install it yourself as:
 ## Usage
 
 Every `MonteCarlo::Experiment` must have a sample method to generate random samples. The samples generated when the experiment is run will be collected into a `MonteCarlo::ExperimentResults` object after an optional computation method to turn the random sample into a meaningful value.
+
 For example, the sample method may draw a random number between 1 and 10 and the computation method will test whether the number is greater than 5, returning `true` or `false` results.
 
 ```ruby
@@ -38,6 +39,14 @@ results.probability_distribution
 ```
 
 Or run it with the shorthand class method syntax:
+
+```ruby
+# Use one method for both sample and computation and run immediately
+results = MonteCarlo::Experiment.run(1000000) do
+  sample = rand(10)
+  sample >= 5
+end
+``` 
 
 ## Docs
 
