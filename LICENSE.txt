@@ -1,4 +1,4 @@
-Copyright (c) 2014 Assaf Gelber
+Copyright (c) 2015 Assaf Gelber
 
 MIT License
 
