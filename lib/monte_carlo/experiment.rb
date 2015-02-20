@@ -53,7 +53,13 @@ module MonteCarlo
     # @return [MonteCarlo::Experiment]
     def initialize(times = DEFAULT_TIMES, &block)
       @times = times
+      raise ArgumentError, "`times` must be a positive integer" unless valid_times?
       MonteCarlo::ExperimentDSL.new(self).instance_eval(&block) if block_given?
+    end
+
+    def times=(times)
+      @times = times
+      raise ArgumentError, "`times` must be a positive integer" unless valid_times?
     end
 
     # Run the experiment
@@ -91,6 +97,10 @@ module MonteCarlo
       end
 
       result
+    end
+
+    def valid_times?
+      @times.is_a?(Fixnum) && @times > 0
     end
 
   end
