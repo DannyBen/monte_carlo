@@ -4,13 +4,52 @@ describe MonteCarlo::Experiment do
 
   let(:times) { 10 }
   let(:sample_value) { 1 }
+  let(:sample_method) { -> { sample_value } }
   let(:computation) { ->(sample) {sample * 2} }
   let(:experiment) do
     experiment = MonteCarlo::Experiment.new
     experiment.times = times
-    experiment.sample_method = -> { sample_value }
+    experiment.sample_method = sample_method
     experiment.computation = computation
     experiment
+  end
+
+  describe :initialize do
+    shared_examples_for :raises_argument_error do
+      it 'should raise an ArgumentError' do
+        expect {
+          MonteCarlo::Experiment.new(times)
+        }.to raise_error ArgumentError
+      end
+    end
+
+    context 'when `times` is not a number' do
+      let(:times) { 'no good' }
+      it_behaves_like :raises_argument_error
+    end
+
+    context 'when `times` is negative' do
+      let(:times) { -1 }
+      it_behaves_like :raises_argument_error
+    end
+  end
+
+  describe :times= do
+    shared_examples_for :raises_argument_error do |times|
+      it 'should raise an ArgumentError' do
+        expect {
+          experiment.times = times
+        }.to raise_error ArgumentError
+      end
+    end
+
+    context 'when `times` is not a number' do
+      it_behaves_like :raises_argument_error, 'no good'
+    end
+
+    context 'when `times` is negative' do
+      it_behaves_like :raises_argument_error, -1
+    end
   end
 
   describe :run do
