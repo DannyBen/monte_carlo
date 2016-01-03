@@ -74,12 +74,12 @@ describe MonteCarlo::Experiment do
 
     it 'should return results with correct sample values' do
       results = experiment.run
-      expect(results.map(&:sample_value)).to all( eq sample_value)
+      expect(results.map(&:sample_value)).to all( eq sample_value )
     end
 
     it 'should return results with correct values' do
       results = experiment.run
-      expect(results.map(&:value)).to all( eq computation.call(sample_value))
+      expect(results.map(&:value)).to all( eq computation.call(sample_value) )
     end
   end
 
