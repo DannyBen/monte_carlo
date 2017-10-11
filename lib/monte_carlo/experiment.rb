@@ -100,7 +100,7 @@ module MonteCarlo
     end
 
     def valid_times?
-      @times.is_a?(Fixnum) && @times > 0
+      @times.is_a?(Integer) && @times > 0
     end
 
   end
